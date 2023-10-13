@@ -1,0 +1,66 @@
+openapi: 3.0.0
+info:
+  title: Nidz API
+  description: Rest API for Nidz
+  version: 0.0.1
+
+servers:
+  - url: http://localhost:8080
+    description: Local server
+
+paths:
+  - /api/users/{id}:
+      get:
+        summary: Get user by id
+        operationId: getUserById
+        parameters:
+          - name: id
+            in: path
+            description: User id
+            required: true
+            schema:
+              type: uuid
+        responses:
+          '200':
+            description: User object
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/User'
+          '404':
+            description: User not found
+
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        last_name:
+          type: string
+          example: Son
+        first_name:
+          type: string
+          example: Klark
+        birth_date:
+          type: string
+          example: 01-01-2000
+          format: date
+        country:
+          type: string
+          example: France
+        gender:
+          type: string
+          example: Male
+        avatar:
+          type: string
+          example: https://linktomypicture.com
+        email:
+          type: string
+          example: klark.son@nidz.com
+        phone:
+          type: string
+
